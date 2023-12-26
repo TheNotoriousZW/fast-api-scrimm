@@ -22,7 +22,7 @@ def get_posts(db: Session = Depends(get_db), limit: int = 10, skip: int = 0, sea
     posts = db.query(models.Post, func.count(models.Votes.post_id).label("likes")).join(models.Votes,
          models.Votes.post_id == models.Post.id, isouter=True).group_by(models.Post.id).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
     
-    posts = list ( map (lambda x : x._mapping, posts) )
+    results = list ( map (lambda x : x._mapping, posts) )
 
     
     return results

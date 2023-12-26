@@ -1,0 +1,1 @@
+web: uvicorn app.fa:app --host=0.0.0.0 --port=${Port:-5000}
